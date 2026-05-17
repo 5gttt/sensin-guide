@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>仙森｜仙台・青森 7日旅遊導覽</title>
+<style>
+:root {
+  --navy:    #1b2a45;
+  --forest:  #2b6e4e;
+  --amber:   #d4891a;
+  --red:     #c0392b;
+  --bg:      #f4f3ef;
+  --card:    #ffffff;
+  --border:  #e0ddd6;
+  --text:    #1e1e1e;
+  --muted:   #6b6b6b;
+  --badge-am: #e8f4ee;
+  --badge-am-text: #1d6640;
+  --badge-pm: #fff3e0;
+  --badge-pm-text: #8a5000;
+  --badge-eve: #e8eef8;
+  --badge-eve-text: #1b3a6b;
+  --badge-warn: #fff0f0;
+  --badge-warn-text: #b91c1c;
+  --map-btn: #1a73e8;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ─── Header ─── */
+.site-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 20px 16px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.site-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+.site-header .subtitle {
+  font-size: 12px;
+  opacity: .75;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Day Nav ─── */
+.day-nav {
+  display: flex;
+  overflow-x: auto;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--navy);
+  scrollbar-width: none;
+  border-bottom: 2px solid rgba(255,255,255,.12);
+}
+.day-nav::-webkit-scrollbar { display: none; }
+.day-btn {
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,.3);
+  background: transparent;
+  color: rgba(255,255,255,.8);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.day-btn.active {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─── Quick Info Bar ─── */
+.quick-bar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: var(--forest);
+}
+.quick-bar::-webkit-scrollbar { display: none; }
+.qchip {
+  flex-shrink: 0;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ─── Content ─── */
+.day-section {
+  display: none;
+  padding: 0 0 80px;
+}
+.day-section.active { display: block; }
+
+/* Day header card */
+.day-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #2d4a7a 100%);
+  color: #fff;
+  padding: 16px;
+  margin: 12px 12px 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.day-header .day-num {
+  font-size: 11px;
+  opacity: .7;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.day-header .day-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.day-header .hotel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,.15);
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Activity card */
+.act-list { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.act-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.act-card.warn { border-left: 3px solid var(--red); }
+.act-card.highlight { border-left: 3px solid var(--amber); }
+.act-card.transport { border-left: 3px solid var(--forest); }
+.act-card.live { border-left: 3px solid #8b2fc9; background: #fdf8ff; }
+
+.act-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 11px 12px 8px;
+}
+.time-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: .05em;
+  margin-top: 2px;
+}
+.t-am   { background: var(--badge-am);   color: var(--badge-am-text); }
+.t-pm   { background: var(--badge-pm);   color: var(--badge-pm-text); }
+.t-eve  { background: var(--badge-eve);  color: var(--badge-eve-text); }
+.t-warn { background: var(--badge-warn); color: var(--badge-warn-text); }
+.t-live { background: #f3e8ff; color: #6d28d9; }
+.t-flight { background: #e8f0fe; color: #1a55c4; }
+.t-noon { background: #fef9e8; color: #856a00; }
+
+.act-main { flex: 1; }
+.act-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}
+.act-title .star { color: var(--amber); }
+.act-title .live-star { color: #7c3aed; }
+
+.act-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.meta-chip {
+  font-size: 11px;
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.meta-chip.price { color: var(--forest); background: var(--badge-am); border-color: #a8d8bc; }
+.meta-chip.time-chip { color: var(--badge-pm-text); background: var(--badge-pm); border-color: #f0c97a; }
+.meta-chip.warn { color: var(--badge-warn-text); background: var(--badge-warn); border-color: #f5c0c0; }
+
+/* Note area */
+.act-note {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0 12px 10px 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin: 0 12px 10px;
+}
+.act-note.collapsible { display: none; }
+.act-note.collapsible.open { display: block; }
+
+/* Map + expand buttons */
+.act-actions {
+  display: flex;
+  gap: 6px;
+  padding: 0 12px 10px;
+  flex-wrap: wrap;
+}
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--map-btn);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.map-btn svg { width: 12px; height: 12px; }
+.expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Transport timetable */
+.timetable {
+  margin: 0 12px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.timetable-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.timetable-row:last-child { border-bottom: none; }
+.timetable-row.recommended { background: #fffbf0; }
+.tt-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.tt-rec { background: var(--amber); color: #fff; }
+.tt-alt { background: #e5e5e5; color: #555; }
+.tt-times { color: var(--text); font-weight: 500; flex: 1; }
+.tt-note { color: var(--muted); font-size: 11px; }
+
+/* Section divider */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 14px 16px 4px;
+}
+
+/* Flight card */
+.flight-card {
+  background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
+  border: 1px solid #9ec4fb;
+  margin: 10px 12px 0;
+  padding: 12px;
+  border-radius: var(--radius);
+}
+.flight-card .flight-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a55c4;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.flight-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+.flight-city { text-align: center; }
+.flight-city .time { font-size: 22px; font-weight: 700; color: var(--navy); }
+.flight-city .code { font-size: 11px; color: var(--muted); }
+.flight-arrow {
+  flex: 1;
+  text-align: center;
+  color: var(--muted);
+  font-size: 18px;
+}
+.flight-dur {
+  text-align: center;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.flight-warn {
+  font-size: 11px;
+  color: var(--badge-warn-text);
+  background: var(--badge-warn);
+  border-radius: 5px;
+  padding: 4px 8px;
+  margin-top: 6px;
+}
+
+/* ─── Bottom quick reference ─── */
+.quick-ref {
+  background: var(--navy);
+  color: #fff;
+  padding: 20px 16px;
+  margin-top: 8px;
+}
+.quick-ref h2 {
+  font-size: 14px;
+  letter-spacing: .05em;
+  margin-bottom: 12px;
+  opacity: .9;
+}
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.ref-item {
+  background: rgba(255,255,255,.08);
+  border-radius: 8px;
+  padding: 10px;
+}
+.ref-item .label { font-size: 10px; opacity: .65; margin-bottom: 2px; }
+.ref-item .value { font-size: 13px; font-weight: 600; }
+
+/* Floating today button */
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  background: var(--amber);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+  font-family: inherit;
+  letter-spacing: .05em;
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 600px) {
+  .site-header h1 { font-size: 28px; }
+  .act-list { max-width: 540px; margin: 0 auto; }
+  .day-header { max-width: 540px; margin: 12px auto 0; }
+  .flight-card { max-width: 540px; margin: 10px auto 0; }
+  .section-label { max-width: 540px; margin: 0 auto; }
+  .timetable { max-width: 516px; margin: 0 auto 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>仙&#8203;森</h1>
+  <div class="subtitle">仙台・青森 7日旅遊導覽｜6/11–6/17 &#x2708;&#xFE0F;</div>
+</header>
+
+<nav class="day-nav" id="dayNav">
+  <button class="day-btn active" data-day="1" onclick="switchDay(1)">D1 抵仙台</button>
+  <button class="day-btn" data-day="2" onclick="switchDay(2)">D2 仙台市區</button>
+  <button class="day-btn" data-day="3" onclick="switchDay(3)">D3 松島</button>
+  <button class="day-btn" data-day="4" onclick="switchDay(4)">D4 十和田</button>
+  <button class="day-btn" data-day="5" onclick="switchDay(5)">D5 青森市</button>
+  <button class="day-btn" data-day="6" onclick="switchDay(6)">D6 ACAC</button>
+  <button class="day-btn" data-day="7" onclick="switchDay(7)">D7 返台</button>
+</nav>
+
+<div class="quick-bar">
+  <a class="qchip" href="tel:+81776239155">☎ 青森計程車</a>
+  <span class="qchip" onclick="switchDay(1)">✈ BR118 10:05</span>
+  <span class="qchip" onclick="switchDay(7)">✈ BR121 15:30</span>
+  <a class="qchip" href="https://eplus.jp" target="_blank">🎟 androp e+</a>
+  <a class="qchip" href="https://acac-aomori.jp" target="_blank">🏛 ACAC確認</a>
+</div>
+
+<!-- ════════════════════════════════ DAY 1 ════════════════════════════════ -->
+<section class="day-section active" id="day-1">
+
+  <div class="day-header">
+    <div class="day-num">DAY 1 · 6/11（四）</div>
+    <div class="day-title">抵達仙台・城市定向</div>
+    <div class="hotel-badge">🏨 Vista威斯特飯店</div>
+  </div>
+
+  <!-- 航班 -->
+  <div class="flight-card" style="margin-top:12px;">
+    <div class="flight-num">✈ 長榮航空 BR118</div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="time">10:05</div>
+        <div class="code">台北 TPE</div>
+      </div>
+      <div class="flight-arrow">──────</div>
+      <div class="flight-city">
+        <div class="time">14:35</div>
+        <div class="code">仙台 SDJ</div>
+      </div>
+    </div>
+    <div class="flight-dur">飛行時間 3h30m｜⚠️ 08:00 前報到</div>
+    <div class="flight-warn">⚠️ 出關後約 15:35 可搭車，建議搭 ★15:48 班次</div>
+  </div>
+
+  <div class="section-label">仙台空港鐵道</div>
+  <div class="act-list">
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-flight">交通</span>
+        <div class="act-main">
+          <div class="act-title">仙台空港 → 仙台駅（エアポートライン）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥660 IC</span>
+            <span class="meta-chip">約25分</span>
+          </div>
+        </div>
+      </div>
+      <div class="timetable">
+        <div class="timetable-row"><span class="tt-tag tt-alt">備案</span><span class="tt-times">15:28 → 15:53</span><span class="tt-note">前一班</span></div>
+        <div class="timetable-row recommended"><span class="tt-tag tt-rec">★建議</span><span class="tt-times">15:48 → 16:13</span><span class="tt-note">出關後最順</span></div>
+        <div class="timetable-row"><span class="tt-tag tt-alt">備案</span><span class="tt-times">16:08 → 16:34</span><span class="tt-note">後一班</span></div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=仙台空港駅" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          仙台空港
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">入住 Vista威斯特飯店</div>
+          <div class="act-meta">
+            <span class="meta-chip time-chip">16:13抵仙台駅</span>
+            <span class="meta-chip">放行李後輕裝</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Vista+Sendai" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          飯店地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card highlight">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title"><span class="star">★</span> 喜久水庵「喜久福」</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥360</span>
+            <span class="meta-chip">仙台駅2F エスパル</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">五條悟最愛款：ずんだ生クリーム大福
+仙台駅2F エスパル or 3F 新幹線口附近均有</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=喜久水庵+エスパル仙台" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card highlight">
+      <div class="act-head">
+        <span class="time-badge t-eve">傍晚</span>
+        <div class="act-main">
+          <div class="act-title"><span class="star">★</span> 咒術迴戰聖地巡禮：泉中央エリア</div>
+          <div class="act-meta">
+            <span class="meta-chip time-chip">16:20出發</span>
+            <span class="meta-chip">南北線 15分</span>
+            <span class="meta-chip">約1.5–2小時</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">① 駅1F 歩行者専用道路3号線：マンホール3枚（乙骨・リカ・石流龍）
+② ペデストリアンデッキ（バスプール近く）
+③ 駅ビル「Swing」＋駅前「ピラミッドの泉」
+④ かむり大橋南詰 → ユアテックスタジアム望む
+⑤ セルバ泉中央（泉区泉中央1-8-6，駅徒歩5分）
+
+⏰ 16:20 出發（16:13 抵仙台駅，換乘南北線）
+⏰ 18:00 前返仙台駅趕晚餐</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=泉中央駅+仙台市" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          泉中央駅
+        </a>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=セルバ泉中央+仙台市" target="_blank" style="background:#1a73e8cc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          セルバ泉中央
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚餐</span>
+        <div class="act-main">
+          <div class="act-title">牛舌街晚餐</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥1,800–2,500</span>
+            <span class="meta-chip">仙台駅地下</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">推薦：利久本店 or 善治郎
+牛舌定食套餐含麥飯・尾湯，份量十足</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=利久+仙台駅" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          利久本店
+        </a>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=善治郎+仙台" target="_blank" style="background:#1a73e8cc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          善治郎
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 2 ════════════════════════════════ -->
+<section class="day-section" id="day-2">
+
+  <div class="day-header">
+    <div class="day-num">DAY 2 · 6/12（五）</div>
+    <div class="day-title">仙台建築文化・購物</div>
+    <div class="hotel-badge">🏨 Vista威斯特飯店</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">仙台媒體中心（伊東豊雄）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費</span>
+            <span class="meta-chip time-chip">9:00開館</span>
+            <span class="meta-chip">建議1.5小時</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">定禅寺通欅木大道對面，管狀結構玻璃大樓
+2001年開幕，入選20世紀建築百選</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=せんだいメディアテーク" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">一番町商店街午餐＋購物</div>
+          <div class="act-meta">
+            <span class="meta-chip">藥妝・生活雜貨・伴手禮</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">午餐推薦味噌拉麵，逛街採購集中於此</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=一番町+仙台+商店街" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚</span>
+        <div class="act-main">
+          <div class="act-title">瑞鳳殿（¥570）→ 青葉城跡（¥770）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">るーぷる仙台 一日券¥630</span>
+            <span class="meta-chip time-chip">9:00–17:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">搭るーぷる仙台觀光巴士串聯兩處
+資料展示館含在票價內</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=瑞鳳殿+仙台" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          瑞鳳殿
+        </a>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=仙台城跡+青葉城" target="_blank" style="background:#1a73e8cc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          青葉城跡
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card highlight">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚</span>
+        <div class="act-main">
+          <div class="act-title"><span class="star">★</span> 咒術迴戰聖地：八木山橋</div>
+          <div class="act-meta">
+            <span class="meta-chip">青葉城跡から徒步2分</span>
+            <span class="meta-chip warn">⚠️ 橋上觀景即可</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">漫畫第22話「八十八橋」原型
+70m 深竜ノ口渓谷地景，仙台市中心稀有自然景觀
+⚠️ 渓谷底部立入禁止（落石危険），橋上觀景即可</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=八木山橋+仙台" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚餐</span>
+        <div class="act-main">
+          <div class="act-title">國分町居酒屋：螃蟹 or 海鮮</div>
+          <div class="act-meta">
+            <span class="meta-chip price">人均 ¥2,500–4,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=国分町+居酒屋+仙台" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          國分町
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 3 ════════════════════════════════ -->
+<section class="day-section" id="day-3">
+
+  <div class="day-header">
+    <div class="day-num">DAY 3 · 6/13（六）</div>
+    <div class="day-title">松島一日遊 ＋ androp Live</div>
+    <div class="hotel-badge">🏨 Vista威斯特飯店</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">仙台駅 → 松島海岸（JR仙石線）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥418</span>
+            <span class="meta-chip">約40分</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=松島海岸駅" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          松島海岸駅
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">五大堂 ＋ 福浦橋</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費</span>
+            <span class="meta-chip">步行即達</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=五大堂+松島" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">瑞巌寺（¥700）＋ 圓通院</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥700</span>
+            <span class="meta-chip">伊達政宗建造禪寺</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">洞窟群穿越感強，前殿繪畫色彩保存良好</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=瑞巌寺+松島" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午餐</span>
+        <div class="act-main">
+          <div class="act-title">松島灣海鮮午餐</div>
+          <div class="act-meta">
+            <span class="meta-chip price">焼き牡蠣¥200/顆</span>
+            <span class="meta-chip price">海膽丼¥2,500</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">港邊市場直送，牡蠣是此地名物</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=松島+海鮮市場" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">松島灣遊覽船（約50分）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥1,500</span>
+            <span class="meta-chip">260座島嶼</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=松島遊覧船+乗り場" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          乘船處
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-eve">傍晚</span>
+        <div class="act-main">
+          <div class="act-title">JR 返仙台｜ずんだ茶寮</div>
+          <div class="act-meta">
+            <span class="meta-chip">傍晚回仙台準備 Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">回仙台後可先在仙台駅 ずんだ茶寮吃甜點補充體力，
+再前往 Live House darwin（廣瀬通方向，步行可達）</div>
+    </div>
+
+    <div class="act-card live">
+      <div class="act-head">
+        <span class="time-badge t-live">Live</span>
+        <div class="act-main">
+          <div class="act-title"><span class="live-star">★</span> androp Live @ 仙台darwin</div>
+          <div class="act-meta">
+            <span class="meta-chip time-chip">17:30 開場</span>
+            <span class="meta-chip time-chip">18:00 開演</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">📍 仙台市青葉区国分町2-5-20
+🚇 地下鉄「広瀬通」站步行5分
+
+購票：
+• e+（ePlus）→ eplus.jp
+• GIP → global.pia.jp/gip/
+
+⚠️ 需提前購票，現場可能已售罄</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=仙台darwin+国分町" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          darwin 地圖
+        </a>
+        <a class="map-btn" href="https://eplus.jp" target="_blank" style="background:#7c3aed;">
+          🎟 e+ 購票
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 4 ════════════════════════════════ -->
+<section class="day-section" id="day-4">
+
+  <div class="day-header">
+    <div class="day-num">DAY 4 · 6/14（日）</div>
+    <div class="day-title">移動十和田・美術館・入住青森屋</div>
+    <div class="hotel-badge">🏨 星野集團 青森屋</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">仙台 → 七戸十和田（東北新幹線 はやぶさ）</div>
+          <div class="act-meta">
+            <span class="meta-chip">七戸十和田駅下車</span>
+          </div>
+        </div>
+      </div>
+      <div class="timetable">
+        <div class="timetable-row"><span class="tt-tag tt-alt">備案早</span><span class="tt-times">06:40 → 08:47</span><span class="tt-note">はやぶさ95（2h07m）</span></div>
+        <div class="timetable-row recommended"><span class="tt-tag tt-rec">★建議</span><span class="tt-times">08:05 → 09:34</span><span class="tt-note">はやぶさ1（最快1h29m）</span></div>
+        <div class="timetable-row"><span class="tt-tag tt-alt">備案</span><span class="tt-times">09:05 → 10:37</span><span class="tt-note">はやぶさ3（1h32m）</span></div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=七戸十和田駅" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          七戸十和田駅
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">定額計程車：駅 → 美術館</div>
+          <div class="act-meta">
+            <span class="meta-chip price">定額 ¥4,500</span>
+            <span class="meta-chip">約20分</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">青森計程車定額制度，直達美術館門口
+TEL: 0176-23-5155（事前確認）</div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">十和田市現代美術館（西澤立衛）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥510+企劃展</span>
+            <span class="meta-chip time-chip">9:00–17:00</span>
+            <span class="meta-chip">建議2小時</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">✅ 週日正常開館
+路上的藝術裝置（上面的空間/花卉之家）不可錯過</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=十和田市現代美術館" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">十和田市教育プラザ圖書館（安藤忠雄）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費</span>
+            <span class="meta-chip">步行5分</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">清水混凝土＋三角天窗，與美術館形成建築對比
+安藤忠雄代表作之一，在地人日常使用的圖書館</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=十和田市教育プラザ+安藤忠雄" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午餐</span>
+        <div class="act-main">
+          <div class="act-title">十和田鰻魚料理</div>
+          <div class="act-meta">
+            <span class="meta-chip">十和田湖流域養殖</span>
+            <span class="meta-chip">在地名物</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=十和田市+うなぎ+料理" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          附近鰻魚店
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">Check in 星野集團 青森屋</div>
+          <div class="act-meta">
+            <span class="meta-chip">計程車 or 飯店免費接送</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">⚠️ 飯店免費接送需提前預約</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=星野集団+青森屋" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          青森屋
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card highlight">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚</span>
+        <div class="act-main">
+          <div class="act-title"><span class="star">★</span> みちのく祭りや ＋ のれそれ表演</div>
+          <div class="act-meta">
+            <span class="meta-chip time-chip">20:00 開演</span>
+            <span class="meta-chip warn">⚠️ 需提前預約</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">津輕三味線＋睡魔祭燈籠秀
+晚餐與表演同時進行，含在住宿費中（需確認）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 5 ════════════════════════════════ -->
+<section class="day-section" id="day-5">
+
+  <div class="day-header">
+    <div class="day-num">DAY 5 · 6/15（一）</div>
+    <div class="day-title">青森屋早晨・移動市區・縣立美術館</div>
+    <div class="hotel-badge">🏨 Dormy Inn 青森</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">青森屋早餐 ＋ 園區晨間散策</div>
+        </div>
+      </div>
+      <div class="act-note">戶外足湯・庭園・溪流・清晨光線最美
+充分享受再退房</div>
+    </div>
+
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">退房 → 飯店免費送迎巴士 → 青森駅</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費</span>
+            <span class="meta-chip">約40分</span>
+            <span class="meta-chip warn">⚠️ 退房前3天預約</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">Check in Dormy Inn 青森</div>
+          <div class="act-meta">
+            <span class="meta-chip">青森駅步行5分鐘內</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=ドーミーイン青森" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Dormy Inn
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">青森縣立美術館（青木淳）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥510</span>
+            <span class="meta-chip time-chip">9:00–18:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">奈良美智《青森犬》、シャガール舞台背景畫
+白色迷宮式空間，自然採光極佳</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森県立美術館" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">三内丸山遺跡（世界遺產）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費</span>
+            <span class="meta-chip">美術館旁步行</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">繩文時代大型聚落遺址
+六本柱建築重建，穿越 5,000 年感受極強</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=三内丸山遺跡" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚餐</span>
+        <div class="act-main">
+          <div class="act-title">青森市區居酒屋海鮮</div>
+          <div class="act-meta">
+            <span class="meta-chip price">人均 ¥3,000起</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">帆立貝・大間鮪魚・青森地酒
+6月旬季：白魚、帆立、剛入季的鮪魚</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森市+居酒屋+海鮮" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          附近居酒屋
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 6 ════════════════════════════════ -->
+<section class="day-section" id="day-6">
+
+  <div class="day-header">
+    <div class="day-num">DAY 6 · 6/16（二）</div>
+    <div class="day-title">安藤忠雄 ACAC・睡魔之家・A-Factory</div>
+    <div class="hotel-badge">🏨 Dormy Inn 青森</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card transport warn">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">青森駅前 → 青森公立大学前（JRバス横内線）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥610</span>
+            <span class="meta-chip warn">⚠️ 出發前確認 acac-aomori.jp</span>
+          </div>
+        </div>
+      </div>
+      <div class="timetable">
+        <div class="timetable-row"><span class="tt-tag tt-alt">無早班</span><span class="tt-times">──</span><span class="tt-note">09:35 為最早班</span></div>
+        <div class="timetable-row recommended"><span class="tt-tag tt-rec">★建議</span><span class="tt-times">09:35 → 10:15</span><span class="tt-note">40分（¥610）</span></div>
+        <div class="timetable-row"><span class="tt-tag tt-alt">備案</span><span class="tt-times">11:15 → 11:55</span><span class="tt-note">時間較緊</span></div>
+      </div>
+      <div class="act-note">搭車地點：青森駅前 JRバス乘り場
+下車站：青森公立大学前，步行約5分至 ACAC</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森駅前+バスのりば" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          巴士乘車處
+        </a>
+        <a class="map-btn" href="https://acac-aomori.jp" target="_blank" style="background:#2b6e4e;">
+          🏛 ACAC官網確認
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">午前</span>
+        <div class="act-main">
+          <div class="act-title">国際芸術センター青森 ACAC（安藤忠雄）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">免費（部分展示收費）</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">森中「看不見的建築」
+三棟建物埋入林間，戶外雕塑群散落自然
+安藤忠雄設計，清水混凝土與自然光的對話</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=国際芸術センター青森+ACAC" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          ACAC地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card transport">
+      <div class="act-head">
+        <span class="time-badge t-noon">午</span>
+        <div class="act-main">
+          <div class="act-title">JRバス返青森駅（¥610，約40分）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-noon">午餐</span>
+        <div class="act-main">
+          <div class="act-title">青森魚菜中心 のっけ丼</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥1,500–2,000</span>
+            <span class="meta-chip">購票自選海鮮</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">購票後持票在各攤位換取食材蓋在飯上
+¥200/片起，吃飽約需8–10片</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森魚菜センター+のっけ丼" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">睡魔之家 WARASSE（ワ・ラッセ）</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥620</span>
+            <span class="meta-chip">約1小時</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">大型睡魔燈籠實物展示，6月來是提前體驗祭典的機會</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=ワ・ラッセ+青森ねぶたの家" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-pm">午後</span>
+        <div class="act-main">
+          <div class="act-title">A-Factory ＋ 港口散步</div>
+        </div>
+      </div>
+      <div class="act-note">舊倉庫改建，蘋果酒釀造可見，掃伴手禮
+蘋果酒・蘋果果凍・奶油蘋果派</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=A-FACTORY+青森" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-eve">晚餐</span>
+        <div class="act-main">
+          <div class="act-title">青森最後一頓正式晚餐</div>
+          <div class="act-meta">
+            <span class="meta-chip">鱈魚白子 or 帆立貝鍋</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">6月旬季食材最鮮，鱈魚白子（タラの白子）
+推薦居酒屋點單品，人均 ¥3,000–5,000</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森市+居酒屋+タラ白子" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          附近居酒屋
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DAY 7 ════════════════════════════════ -->
+<section class="day-section" id="day-7">
+
+  <div class="day-header">
+    <div class="day-num">DAY 7 · 6/17（三）</div>
+    <div class="day-title">青森收尾・搭機返台</div>
+    <div class="hotel-badge">✈️ BR121 15:30 返台</div>
+  </div>
+
+  <!-- 航班 -->
+  <div class="flight-card" style="margin-top:12px;">
+    <div class="flight-num">✈ 長榮航空 BR121</div>
+    <div class="flight-route">
+      <div class="flight-city">
+        <div class="time">15:30</div>
+        <div class="code">青森 AOJ</div>
+      </div>
+      <div class="flight-arrow">──────</div>
+      <div class="flight-city">
+        <div class="time">18:40</div>
+        <div class="code">台北 TPE</div>
+      </div>
+    </div>
+    <div class="flight-dur">飛行時間 4h10m</div>
+    <div class="flight-warn">⚠️ 13:30 前抵達機場｜12:55 搭巴士（¥760）｜13:30截止</div>
+  </div>
+
+  <div class="act-list">
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">早餐後退房，行李寄存</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">早</span>
+        <div class="act-main">
+          <div class="act-title">ASPAM 展望台</div>
+          <div class="act-meta">
+            <span class="meta-chip price">¥510</span>
+            <span class="meta-chip">約30分</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">三角形地標建築，青森港口及津輕海峽全景
+頂樓展望台，天氣好可遠眺北海道</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=アスパム+青森観光物産館" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          地圖
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <div class="act-head">
+        <span class="time-badge t-am">午前</span>
+        <div class="act-main">
+          <div class="act-title">最後掃貨（青森魚菜中心 or A-Factory）</div>
+          <div class="act-meta">
+            <span class="meta-chip warn">⚠️ 12:30前完成</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">蘋果酒・大間鮪魚罐頭・南部せんべい
+⚠️ 12:30 前完成掃貨，預留搭車時間</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森魚菜センター" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          魚菜中心
+        </a>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=A-FACTORY+青森" target="_blank" style="background:#1a73e8cc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          A-Factory
+        </a>
+      </div>
+    </div>
+
+    <div class="act-card warn">
+      <div class="act-head">
+        <span class="time-badge t-warn">⚠️ 重要</span>
+        <div class="act-main">
+          <div class="act-title">前往青森機場（BR121 15:30 起飛）</div>
+          <div class="act-meta">
+            <span class="meta-chip warn">★ 12:55 搭巴士</span>
+            <span class="meta-chip warn">13:30 到機場</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-note">⚠️ 最晚 12:55 搭乘市營巴士（¥760，約35分）
+→ 13:30 抵青森機場（起飛前2小時）
+BR121 報到截止：14:30
+
+計程車備案：約¥3,000，直達</div>
+      <div class="act-actions">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森空港" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          青森機場
+        </a>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=青森駅前+バス+青森空港" target="_blank" style="background:#1a73e8cc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          搭車地點
+        </a>
+      </div>
+    </div>
+
+    <div class="flight-card" style="margin:8px 12px 0;">
+      <div class="flight-num">✈ 長榮航空 BR121 · 返台</div>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="time">15:30</div>
+          <div class="code">青森 AOJ</div>
+        </div>
+        <div class="flight-arrow">──────</div>
+        <div class="flight-city">
+          <div class="time">18:40</div>
+          <div class="code">桃園 TPE</div>
+        </div>
+      </div>
+      <div class="flight-dur">飛行時間 4h10m｜平安回家 🏠</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ Quick Reference ════════════ -->
+<div class="quick-ref">
+  <h2>📋 快速參考</h2>
+  <div class="ref-grid">
+    <div class="ref-item">
+      <div class="label">去程航班</div>
+      <div class="value">BR118 · 10:05 TPE</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">回程航班</div>
+      <div class="value">BR121 · 15:30 AOJ</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">仙台飯店</div>
+      <div class="value">Vista威斯特 D1-3</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">青森市區</div>
+      <div class="value">Dormy Inn D5-7</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">androp Live</div>
+      <div class="value">6/13 darwin 18:00</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">青森屋</div>
+      <div class="value">星野集團 D4</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">機場巴士</div>
+      <div class="value">D7 最晚 12:55</div>
+    </div>
+    <div class="ref-item">
+      <div class="label">計程車備用</div>
+      <div class="value">0176-23-5155</div>
+    </div>
+  </div>
+</div>
+
+<button class="fab" onclick="scrollToTop()">▲ 頂部</button>
+
+<script>
+function switchDay(n) {
+  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('day-' + n).classList.add('active');
+  document.querySelector('[data-day="' + n + '"]').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Auto-detect today and highlight
+(function() {
+  const dayMap = {
+    '6/11': 1, '6/12': 2, '6/13': 3,
+    '6/14': 4, '6/15': 5, '6/16': 6, '6/17': 7
+  };
+  const now = new Date();
+  const key = (now.getMonth() + 1) + '/' + now.getDate();
+  if (dayMap[key]) {
+    switchDay(dayMap[key]);
+  }
+})();
+</script>
+</body>
+</html>
