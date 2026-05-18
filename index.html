@@ -148,10 +148,33 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
 /* Map icon SVG helper */
 .pin-icon{width:12px;height:12px;display:inline-block;vertical-align:middle;margin-right:3px}
 
+/* Shop cards */
+.shop-area-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:16px 16px 6px;display:flex;align-items:center;gap:8px}
+.shop-area-title::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--amber);flex-shrink:0}
+.shop-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--border);margin:0 12px 8px}
+.shop-card.featured{border-left:3px solid var(--amber);background:#fffdf5}
+.shop-head{display:flex;align-items:flex-start;gap:8px;padding:11px 12px 5px}
+.shop-type{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.03em;margin-top:2px;white-space:nowrap}
+.st-cafe{background:#e8f4ee;color:#1d6640}
+.st-select{background:#e8eef8;color:#1b3a6b}
+.st-retro{background:#fff3e0;color:#8a5000}
+.st-art{background:#f3e8ff;color:#6d28d9}
+.st-soba{background:#f0fdf4;color:#166534}
+.shop-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.3}
+.shop-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.6}
+.shop-hours{font-size:11px;color:var(--muted);padding:0 12px 4px}
+.shop-actions{display:flex;gap:6px;padding:4px 12px 10px;flex-wrap:wrap}
+.ig-btn{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:6px;text-decoration:none}
+.web-btn{display:inline-flex;align-items:center;gap:4px;background:var(--navy);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:6px;text-decoration:none}
+.shop-closed-note{font-size:11px;color:#b91c1c;background:#fff0f0;margin:0 12px 6px;padding:5px 9px;border-radius:6px;line-height:1.6}
+.day-hint{font-size:10px;font-weight:600;color:var(--forest);background:#e8f4ee;padding:1px 7px;border-radius:4px}
+
 /* Responsive */
 @media(min-width:600px){
   .site-header h1{font-size:28px}
   .act-list,.day-header,.flight-card,.section-label{max-width:540px;margin-left:auto;margin-right:auto}
+  .shop-card,.shop-area-title{max-width:540px;margin-left:auto;margin-right:auto}
+  .shop-card{margin-left:auto;margin-right:auto}
   .day-header{margin-top:12px}
   .flight-card{margin-top:10px}
 }
@@ -172,6 +195,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
   <button class="day-btn" data-day="5" onclick="switchDay(5)">D5 青森市</button>
   <button class="day-btn" data-day="6" onclick="switchDay(6)">D6 ACAC</button>
   <button class="day-btn" data-day="7" onclick="switchDay(7)">D7 返台</button>
+  <button class="day-btn" data-day="8" onclick="switchDay(8)">☕ 店家</button>
 </nav>
 
 <div class="quick-bar">
@@ -1181,6 +1205,212 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     </div>
 
   </div>
+</section>
+
+<!-- ══════════════════════ SHOPS ══════════════════════ -->
+<section class="day-section" id="day-8">
+  <div class="day-header">
+    <div class="day-num">精選店家</div>
+    <div class="day-title">咖啡廳・特色店家指南</div>
+    <div class="hotel-badge">📍 四大區域精選</div>
+  </div>
+
+  <!-- ── 仙台市區 ── -->
+  <div class="shop-area-title">🏙 仙台市區 <span class="day-hint">D1・D2</span></div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">SENDAI KOFFEE CO.</div>
+        <div class="shop-sub">📍 青葉区春日町4-25｜Jazz 風隱密咖啡館，精品豆手沖</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 12:00–18:00（不定休）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=SENDAI+KOFFEE+仙台+春日町" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/sendaikoffeeco/" target="_blank">📷 @sendaikoffeeco</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">BLUE LEAF CAFÉ 仙台</div>
+        <div class="shop-sub">📍 青葉区一番町3-8-8｜精選食材法式吐司・北中農場冰淇淋・書籍裝潢</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 10:00–20:00（LO 19:30）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=BLUE+LEAF+CAFE+仙台+一番町" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/blueleafcafe.sendai/" target="_blank">📷 @blueleafcafe.sendai</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">HEY</div>
+        <div class="shop-sub">📍 青葉区片平（大町西公園駅 徒步8分）｜名店コラボ・早上現烤甜甜圈・美式早午餐</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 9:30–18:00（週日 17:00）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=HEY+仙台+カフェ+片平" target="_blank">📍 地圖</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-select">選貨店</span>
+      <div>
+        <div class="shop-name">Origami Sendai</div>
+        <div class="shop-sub">📍 仙台市内｜精品選貨店，12:00–19:00</div>
+      </div>
+    </div>
+    <div class="shop-closed-note">⚠️ 定休日：水曜・木曜</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Origami+Sendai" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/origami_sendai/" target="_blank">📷 @origami_sendai</a>
+    </div>
+  </div>
+
+  <!-- ── 松島 ── -->
+  <div class="shop-area-title">🌊 松島 <span class="day-hint">D3 · 6/13 金曜</span></div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">Bridge33 CAFE AND HOSTEL</div>
+        <div class="shop-sub">📍 松島町高城町2-62-6｜千層蛋糕・夏威夷早午餐・海景露臺・週六夜間營業</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 平日 12:00–18:00｜土日祝 8:00–10:00 &amp; 12:00–18:00</div>
+    <div class="shop-closed-note">⚠️ 定休日：水曜・木曜（D3=金曜 ✓ 開門）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Bridge33+CAFE+松島" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/_bridge33_/" target="_blank">📷 @_bridge33_</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">絕景カフェ</span>
+      <div>
+        <div class="shop-name">はすのはねcafe</div>
+        <div class="shop-sub">📍 松島市街（4樓・無招牌）｜松島灣絕景・米糰子＆鬆餅・七夕和紙體驗</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 月木金 11:00–16:00｜土日祝 11:00–17:00</div>
+    <div class="shop-closed-note">⚠️ 定休日：火曜・水曜（D3=金曜 ✓ 開門，16:00 止）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=はすのはねcafe+松島" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/hasunohanecafe/" target="_blank">📷 @hasunohanecafe</a>
+    </div>
+  </div>
+
+  <!-- ── 十和田市 ── -->
+  <div class="shop-area-title">🎨 十和田市 <span class="day-hint">D4 · 6/14 土曜</span></div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-art">美術館カフェ</span>
+      <div>
+        <div class="shop-name">cube cafe&amp;shop</div>
+        <div class="shop-sub">📍 西二番町10-9（十和田市現代美術館内）｜草間彌生周邊・在地選品・不買票也可進入</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 Café 9:00–16:30｜Shop 9:00–17:00</div>
+    <div class="shop-closed-note">⚠️ 美術館休館日（火曜）定休（D4=土曜 ✓ 開門）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=十和田市現代美術館+cube+cafe" target="_blank">📍 地圖</a>
+      <a class="web-btn" href="https://towadaartcenter.com/overview/cafe-shop/" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">Cafe えん屋</div>
+        <div class="shop-sub">📍 十和田市｜在地社區型咖啡廳</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 詳見 Instagram</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Cafe+えん屋+十和田市" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/cafe_enya.towada/" target="_blank">📷 @cafe_enya.towada</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-soba">蕎麥咖啡</span>
+      <div>
+        <div class="shop-name">蕎麦Cafe 福</div>
+        <div class="shop-sub">📍 十和田市｜十和田觀光官方推薦，在地特色蕎麥咖啡廳</div>
+      </div>
+    </div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=蕎麦Cafe+福+十和田市" target="_blank">📍 地圖</a>
+      <a class="web-btn" href="https://www.towada.travel/local/soba-cafe-fuku" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
+  <!-- ── 青森市區 ── -->
+  <div class="shop-area-title">🍎 青森市區 <span class="day-hint">D5・D6 · 6/15–16</span></div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">咖啡廳</span>
+      <div>
+        <div class="shop-name">珈琲茶館 麦藁帽子 ⭐</div>
+        <div class="shop-sub">📍 青森市新町1-14-13 工藤ビル1F｜虹吸式手工萃取・嚴選豆・最多4人・現金・PayPay</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 平日 8:00–11:00 &amp; 12:00–16:30｜週末 9:00–11:30 &amp; 13:00–16:30</div>
+    <div class="shop-closed-note">⚠️ 定休日：每週三・不定休（D5=日・D6=火 均開門 ✓）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=珈琲茶館+麦藁帽子+青森市+新町" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/mugiwaboshi_coffee/" target="_blank">📷 @mugiwaboshi_coffee</a>
+      <a class="web-btn" href="https://sites.google.com/view/mugiwaraboshi-coffee" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-retro">純喫茶</span>
+      <div>
+        <div class="shop-name">喫茶マロン</div>
+        <div class="shop-sub">📍 青森市安方2-6-7｜1970年創業・古董時鐘・錫製玩具・南瓜布丁・青森式晨間套餐</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 7:00–17:00（LO 16:40）｜晨間套餐 7:00–11:00</div>
+    <div class="shop-closed-note">⚠️ 定休日：水曜・第3木曜（D5=日・D6=火 均開門 ✓）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=喫茶マロン+青森市+安方" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/marron_coffee_aomori/" target="_blank">📷 @marron_coffee_aomori</a>
+      <a class="web-btn" href="https://www.marroncoffee.jp/" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-select">選品店</span>
+      <div>
+        <div class="shop-name">NICO STOCK</div>
+        <div class="shop-sub">📍 青森駅 徒步3分（ニコニコ通り）｜多品牌複合生活選品設施</div>
+      </div>
+    </div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=NICO+STOCK+青森" target="_blank">📍 地圖</a>
+      <a class="web-btn" href="https://nicostock.com/" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
 </section>
 
 <!-- ══════════════════════ Quick Ref ══════════════════════ -->
