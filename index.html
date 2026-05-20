@@ -102,6 +102,8 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
 /* Intro + resto (collapsible) */
 .act-intro{display:none;border-top:1px solid var(--border);padding:10px 12px;background:#fafaf8;font-size:13px;line-height:1.75;color:#3a3a3a}
 .act-intro.open{display:block}
+.act-intro .ref-img{width:100%;border-radius:8px;margin-bottom:8px;display:block;object-fit:cover}
+.act-intro .ref-img-caption{font-size:11px;color:var(--muted);text-align:center;margin:-4px 0 10px;display:block}
 
 /* Restaurant list inside intro */
 .resto-list{display:flex;flex-direction:column;gap:6px;margin-top:2px}
@@ -467,7 +469,11 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=八木山橋+仙台" target="_blank">📍 地圖</a>
         <button class="expand-btn" onclick="toggleIntro(this)">簡介 ▾</button>
       </div>
-      <div class="act-intro">橫跨竜ノ口渓谷的拱形鐵橋，橋面距谷底約70公尺。周邊寂靜、綠意深邃，是仙台都心難得的自然峽谷景觀。因與《咒術迴戰》第22話「八十八橋」原型高度吻合而成為聖地，從橋上俯瞰的峽谷地景令人震撼。⚠️ 渓谷底部立入禁止，橋上觀景即可。</div>
+      <div class="act-intro">
+        <img src="https://pbs.twimg.com/media/EwSzcHCVIAMVtR5.jpg" alt="咒術迴戰 八十八橋 動畫截圖" class="ref-img">
+        <span class="ref-img-caption">▲ 《咒術迴戰》第22話「八十八橋」動畫截圖</span>
+        橫跨竜ノ口渓谷的拱形鐵橋，橋面距谷底約70公尺。周邊寂靜、綠意深邃，是仙台都心難得的自然峽谷景觀。因與《咒術迴戰》第22話「八十八橋」原型高度吻合而成為聖地，從橋上俯瞰的峽谷地景令人震撼。⚠️ 渓谷底部立入禁止，橋上觀景即可。
+      </div>
     </div>
 
     <!-- 国分町晚餐 -->
@@ -1274,6 +1280,69 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="shop-actions">
       <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Origami+Sendai" target="_blank">📍 地圖</a>
       <a class="ig-btn" href="https://www.instagram.com/origami_sendai/" target="_blank">📷 @origami_sendai</a>
+    </div>
+  </div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">精品咖啡</span>
+      <div>
+        <div class="shop-name">DAMO KAFFEE HAUS ⭐</div>
+        <div class="shop-sub">📍 青葉区本町2-10-5 1F｜廣瀬通駅 2分｜自家焙煎・輕焙帶果香・神戸松本珈琲進口豆・埃塞俄比亞/印尼單品</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 11:00–20:00（水曜定休）</div>
+    <div class="shop-closed-note">⚠️ 現金限定・立食外帶為主・D1=木・D2=金 均開門 ✓</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=DAMO+KAFFEE+HAUS+仙台+本町" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/damokaffeehaus/" target="_blank">📷 @damokaffeehaus</a>
+    </div>
+  </div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-cafe">カフェラウンジ</span>
+      <div>
+        <div class="shop-name">Echoes</div>
+        <div class="shop-sub">📍 青葉区大町2-3-12｜大町西公園駅 1分｜精品咖啡・自然葡萄酒・宮城食材料理・大開口落地窗</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 9:30–21:00（火・水 定休）</div>
+    <div class="shop-closed-note">⚠️ D1=木・D2=金 均開門 ✓｜¥1,000–3,999｜信用卡可</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/place/Echoes/@38.2591016,140.8651339,17z" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/echoes_sendai/" target="_blank">📷 @echoes_sendai</a>
+    </div>
+  </div>
+
+  <div class="shop-card">
+    <div class="shop-head">
+      <span class="shop-type st-select">選貨店</span>
+      <div>
+        <div class="shop-name">Folks Store Sendai</div>
+        <div class="shop-sub">📍 青葉区一番町2-14 旭コーポラスB棟104｜波特蘭西岸風格・服飾・雜貨・黑膠・花藝・自然葡萄酒（HEY 姐妹店）</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 11:00–18:00（木曜定休）</div>
+    <div class="shop-closed-note">⚠️ D1=木 ✗ 休｜D2=金 ✓ 開門</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Folks+Store+Sendai+一番町" target="_blank">📍 地圖</a>
+      <a class="ig-btn" href="https://www.instagram.com/folks_generalstore/" target="_blank">📷 @folks_generalstore</a>
+      <a class="web-btn" href="https://folksshopsendai.myshopify.com/" target="_blank">🌐 官網</a>
+    </div>
+  </div>
+
+  <div class="shop-card featured">
+    <div class="shop-head">
+      <span class="shop-type st-soba">つけ麺</span>
+      <div>
+        <div class="shop-name">つけ麺 おんのじ 仙台本店 ⭐</div>
+        <div class="shop-sub">📍 青葉区（青葉通沿線）｜煮干し濃厚魚介豚骨湯頭・自製厚麵・鹽醃日本豬肩叉燒・2/3客人必點招牌</div>
+      </div>
+    </div>
+    <div class="shop-hours">🕐 詳見 Google Maps（午・晚皆有）</div>
+    <div class="shop-actions">
+      <a class="map-btn" href="https://www.google.com/maps/place/Tsukemen+Onnoji+Sendai/@38.2572004,140.8786396,17z" target="_blank">📍 地圖</a>
     </div>
   </div>
 
