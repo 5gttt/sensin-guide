@@ -213,6 +213,14 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
 .weather-links{padding:10px 12px 16px;display:flex;flex-wrap:wrap;gap:6px}
 .weather-link{display:inline-flex;align-items:center;gap:4px;background:#1a73e8;color:#fff;font-size:12px;font-weight:500;padding:6px 10px;border-radius:6px;text-decoration:none}
 
+/* ──── Day Weather Strip ──── */
+.day-weather{display:flex;align-items:center;gap:10px;margin:8px 12px 0;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px}
+.dw-icon{font-size:20px;flex-shrink:0}
+.dw-temp{font-weight:700;color:var(--navy);white-space:nowrap}
+.dw-desc{color:var(--muted);flex:1;font-size:11px}
+.dw-outfit{font-size:11px;background:#e8f4ee;color:#1d6640;border-radius:4px;padding:2px 7px;white-space:nowrap}
+.dw-rain{font-size:11px;background:#fff0f0;color:#b91c1c;border-radius:4px;padding:2px 7px;white-space:nowrap}
+
 /* ──── Packing List ──── */
 .pack-progress-wrap{margin:12px 12px 0;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:12px 14px}
 .pp-label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:7px}
@@ -285,7 +293,6 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
   <button class="day-btn" data-day="6" onclick="switchDay(6)">D6 ACAC</button>
   <button class="day-btn" data-day="7" onclick="switchDay(7)">D7 返台</button>
   <button class="day-btn" data-day="8" onclick="switchDay(8)">☕ 店家</button>
-  <button class="day-btn" data-day="9" onclick="switchDay(9)">🌤 天氣</button>
   <button class="day-btn" data-day="10" onclick="switchDay(10)">🎒 打包</button>
   <button class="day-btn" data-day="11" onclick="switchDay(11)">🎁 伴手禮</button>
 </nav>
@@ -305,6 +312,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">抵達仙台・城市定向</div>
     <div class="hotel-badge">🏨 Vista威斯特飯店</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">🌧</div><div class="dw-temp">16–22°C</div><div class="dw-desc">多雲有雨・降雨機率高</div><div class="dw-rain">☔ 帶傘＋防水外套</div></div>
 
   <div class="flight-card" style="margin-top:12px">
     <div class="flight-num">✈ 長榮航空 BR118</div>
@@ -476,6 +484,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">仙台建築文化・購物</div>
     <div class="hotel-badge">🏨 Vista威斯特飯店</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">⛅</div><div class="dw-temp">17–23°C</div><div class="dw-desc">晴時多雲</div><div class="dw-outfit">👕 薄外套，備折疊傘</div></div>
 
   <div class="act-list">
 
@@ -600,6 +609,16 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
             <div class="resto-row"><span class="resto-name">三陸海鮮 個室居酒屋 海男</span><span class="resto-score">ぐるなび掲載</span></div>
             <div class="resto-detail">刺身10点盛が名物・市場直送・個室完備</div>
           </div>
+          <div class="resto-item rec">
+            <div class="resto-row"><span class="resto-name">★ 氏ノ木 本店</span><span class="resto-score">食べログ 3.5+</span></div>
+            <div class="resto-detail">青葉区一番町1-6-19 壱番館ビル1F・青葉通一番町駅 南1口 徒步5分</div>
+            <div class="resto-note">究極のアジフライ（骨まで食べられる）・魚介＋地物野菜・現點現做・吧台座可看廚師現場｜17:30–23:00（月・第2・4火曜定休 D2=金 ✓）｜⚠️ 電話預約建議14:00–17:00</div>
+          </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">氏ノ木２</span><span class="resto-score">系列2號店</span></div>
+            <div class="resto-detail">青葉区本町2-17-1 本町Nビル 103・勾當台公園方向</div>
+            <div class="resto-note">同系列・氣氛相同・17:30–23:00（水・第1・3火曜定休 D2=金 ✓）</div>
+          </div>
         </div>
       </div>
     </div>
@@ -614,6 +633,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">松島一日遊 ＋ androp Live</div>
     <div class="hotel-badge">🏨 Vista威斯特飯店</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">🌦</div><div class="dw-temp">16–22°C</div><div class="dw-desc">多雲間晴・午後有雨</div><div class="dw-rain">☔ 防水外套必帶</div></div>
 
   <div class="act-list">
 
@@ -786,6 +806,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">移動十和田・美術館・入住青森屋</div>
     <div class="hotel-badge">🏨 星野集團 青森屋</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">☀️</div><div class="dw-temp">14–21°C</div><div class="dw-desc">晴・日溫差大</div><div class="dw-outfit">👕 輕薄外套＋舒適步行鞋</div></div>
 
   <div class="act-list">
 
@@ -928,6 +949,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">青森屋早晨・移動市區・縣立美術館</div>
     <div class="hotel-badge">🏨 Dormy Inn 青森</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">🌤</div><div class="dw-temp">13–20°C</div><div class="dw-desc">晴時多雲</div><div class="dw-outfit">👕 早晚加薄外套</div></div>
 
   <div class="act-list">
 
@@ -1067,6 +1089,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">安藤忠雄 ACAC・睡魔之家・A-Factory</div>
     <div class="hotel-badge">🏨 Dormy Inn 青森</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">⛅</div><div class="dw-temp">14–21°C</div><div class="dw-desc">多雲</div><div class="dw-outfit">👕 薄外套</div></div>
 
   <div class="act-list">
 
@@ -1240,6 +1263,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     <div class="day-title">青森收尾・搭機返台</div>
     <div class="hotel-badge">✈️ BR121 15:30 返台</div>
   </div>
+  <div class="day-weather"><div class="dw-icon">🌤</div><div class="dw-temp">13–19°C</div><div class="dw-desc">晴・返台日</div><div class="dw-outfit">👕 輕薄即可</div></div>
 
   <div class="flight-card" style="margin-top:12px">
     <div class="flight-num">✈ 長榮航空 BR121</div>
@@ -1617,117 +1641,6 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
     </div>
   </div>
 
-</section>
-
-<!-- ══════════════════════ DAY 9 · 天氣 ══════════════════════ -->
-<section class="day-section" id="day-9">
-  <div class="weather-banner">
-    <h2>🌤 旅程天氣參考</h2>
-    <div class="w-sub">6/11–6/17 仙台・青森｜以下為6月歷史氣候均值，非即時預報<br>出發前請點下方連結查詢 tenki.jp 即時天氣</div>
-  </div>
-
-  <div class="weather-note">☔ 6月為東北地方梅雨季，仙台降雨頻繁；青森梅雨較晚、雨量較少。建議全程攜帶折疊傘，仙台日數加備薄雨衣或防水外套。</div>
-
-  <div class="climate-section">
-    <div class="climate-title-bar">6月氣候均值</div>
-    <div class="climate-grid">
-      <div class="climate-card">
-        <div class="c-loc">📍 仙台市（D1–D3）</div>
-        <div class="c-temp">17–23°C</div>
-        <div class="c-range">早晨涼爽・日間舒適</div>
-        <div class="c-note c-rain">☔ 梅雨高峰期</div>
-      </div>
-      <div class="climate-card">
-        <div class="c-loc">📍 青森市（D4–D7）</div>
-        <div class="c-temp">13–21°C</div>
-        <div class="c-range">早晨偏涼・日間溫和</div>
-        <div class="c-note c-sunny">🌤 少雨偏晴</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="weather-days">
-    <div class="wday-card">
-      <div class="wd-date">D1<br>6/11 四</div>
-      <div class="wd-icon">🌧</div>
-      <div class="wd-info">
-        <div class="wd-temp">16–22°C</div>
-        <div class="wd-desc">多雲有雨　抵仙台下午</div>
-        <div class="wd-rain">☔ 降雨機率高</div>
-      </div>
-      <div class="wd-loc wd-sendai">仙台</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D2<br>6/12 五</div>
-      <div class="wd-icon">⛅</div>
-      <div class="wd-info">
-        <div class="wd-temp">17–23°C</div>
-        <div class="wd-desc">晴時多雲　JJK 聖地巡禮</div>
-      </div>
-      <div class="wd-loc wd-sendai">仙台</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D3<br>6/13 六</div>
-      <div class="wd-icon">🌦</div>
-      <div class="wd-info">
-        <div class="wd-temp">16–22°C</div>
-        <div class="wd-desc">多雲間晴　松島・androp Live</div>
-        <div class="wd-rain">☔ 午後有雨</div>
-      </div>
-      <div class="wd-loc wd-matsushima">松島</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D4<br>6/14 日</div>
-      <div class="wd-icon">☀️</div>
-      <div class="wd-info">
-        <div class="wd-temp">14–21°C</div>
-        <div class="wd-desc">晴　十和田・青森屋</div>
-      </div>
-      <div class="wd-loc wd-aomori">十和田</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D5<br>6/15 一</div>
-      <div class="wd-icon">🌤</div>
-      <div class="wd-info">
-        <div class="wd-temp">13–20°C</div>
-        <div class="wd-desc">晴時多雲　青森市區探索</div>
-      </div>
-      <div class="wd-loc wd-aomori">青森</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D6<br>6/16 二</div>
-      <div class="wd-icon">⛅</div>
-      <div class="wd-info">
-        <div class="wd-temp">14–21°C</div>
-        <div class="wd-desc">多雲　青森 ACAC</div>
-      </div>
-      <div class="wd-loc wd-aomori">青森</div>
-    </div>
-    <div class="wday-card">
-      <div class="wd-date">D7<br>6/17 三</div>
-      <div class="wd-icon">🌤</div>
-      <div class="wd-info">
-        <div class="wd-temp">13–19°C</div>
-        <div class="wd-desc">晴　AOJ 15:30 返台</div>
-      </div>
-      <div class="wd-loc wd-aomori">青森</div>
-    </div>
-  </div>
-
-  <div class="pack-weather-tip">
-    <strong>穿著建議</strong><br>
-    仙台（D1–3）：薄長袖 + 防水外套或雨衣、折疊傘必備<br>
-    十和田・青森屋（D4）：輕薄外套・舒適步行鞋<br>
-    青森市（D5–7）：早晨偏涼 13°C，早晚加薄外套<br>
-    整趟以 15–23°C 準備，洋蔥式穿搭最靈活
-  </div>
-
-  <div class="section-label">即時天氣預報</div>
-  <div class="weather-links">
-    <a class="weather-link" href="https://tenki.jp/forecast/2/9/3410/4105/" target="_blank">🌐 仙台天氣（tenki.jp）</a>
-    <a class="weather-link" href="https://tenki.jp/forecast/2/10/3110/2201/" target="_blank">🌐 青森天氣（tenki.jp）</a>
-    <a class="weather-link" href="https://www.jma.go.jp/jma/index.html" target="_blank">🌐 気象庁官網</a>
-  </div>
 </section>
 
 <!-- ══════════════════════ DAY 10 · 打包清單 ══════════════════════ -->
