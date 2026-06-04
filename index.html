@@ -180,6 +180,93 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
   .day-header{margin-top:12px}
   .flight-card{margin-top:10px}
 }
+
+/* ──── Weather ──── */
+.weather-banner{background:linear-gradient(135deg,#2c6fa8 0%,#5ba3d9 60%,#87c3ef 100%);padding:16px;margin:12px 12px 0;border-radius:var(--radius);color:#fff;box-shadow:var(--shadow)}
+.weather-banner h2{font-size:16px;font-weight:700;margin-bottom:4px}
+.weather-banner .w-sub{font-size:11px;opacity:.8;line-height:1.7}
+.weather-note{margin:8px 12px;background:#fffbf0;border:1px solid #f0c97a;border-radius:8px;padding:9px 11px;font-size:11px;color:#8a5000;line-height:1.7}
+.climate-section{padding:4px 12px 0}
+.climate-title-bar{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.climate-title-bar::before{content:'';display:block;width:3px;height:12px;border-radius:2px;background:var(--forest);flex-shrink:0}
+.climate-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.climate-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px}
+.climate-card .c-loc{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.climate-card .c-temp{font-size:18px;font-weight:700;color:var(--navy)}
+.climate-card .c-range{font-size:10px;color:var(--muted);margin-top:2px}
+.climate-card .c-note{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-top:5px}
+.c-rain{background:#e8f0fe;color:#1a55c4}.c-sunny{background:#e8f4ee;color:#1d6640}
+.weather-days{padding:8px 12px;display:flex;flex-direction:column;gap:6px}
+.wday-card{background:var(--card);border-radius:10px;box-shadow:var(--shadow);border:1px solid var(--border);display:flex;align-items:center;padding:9px 12px;gap:10px}
+.wd-date{font-size:11px;font-weight:700;color:var(--navy);width:66px;flex-shrink:0;line-height:1.6}
+.wd-icon{font-size:24px;flex-shrink:0}
+.wd-info{flex:1}
+.wd-temp{font-size:13px;font-weight:700;color:var(--text)}
+.wd-desc{font-size:11px;color:var(--muted);margin-top:1px}
+.wd-rain{font-size:10px;background:#e8f0fe;color:#1a55c4;border:1px solid #9ec4fb;padding:1px 5px;border-radius:3px;margin-top:3px;display:inline-block}
+.wd-loc{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;flex-shrink:0;white-space:nowrap;align-self:flex-start;margin-top:2px}
+.wd-sendai{background:#e8eef8;color:#1b3a6b}
+.wd-aomori{background:#e8f4ee;color:#1d6640}
+.wd-matsushima{background:#f3e8ff;color:#6d28d9}
+.pack-weather-tip{margin:8px 12px 0;background:#e8f4ee;border:1px solid #a8d8bc;border-radius:8px;padding:10px 12px;font-size:12px;color:#1d6640;line-height:1.8}
+.pack-weather-tip strong{color:#155e3b}
+.weather-links{padding:10px 12px 16px;display:flex;flex-wrap:wrap;gap:6px}
+.weather-link{display:inline-flex;align-items:center;gap:4px;background:#1a73e8;color:#fff;font-size:12px;font-weight:500;padding:6px 10px;border-radius:6px;text-decoration:none}
+
+/* ──── Packing List ──── */
+.pack-progress-wrap{margin:12px 12px 0;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:12px 14px}
+.pp-label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:7px}
+.pp-label span{color:var(--forest);font-weight:700}
+.pp-bar{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.pp-fill{height:100%;background:linear-gradient(90deg,var(--forest),#52c481);border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.pack-cat-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:14px 16px 4px;display:flex;align-items:center;gap:8px}
+.pack-cat-title::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--amber);flex-shrink:0}
+.pack-list{padding:4px 12px;display:flex;flex-direction:column;gap:5px}
+.pack-item{display:flex;align-items:flex-start;gap:10px;background:var(--card);border-radius:10px;padding:9px 12px;border:1px solid var(--border);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;user-select:none}
+.pack-item:active{transform:scale(.98)}
+.pack-item.done{background:#f0fdf4;border-color:#a8d8bc}
+.pack-item.done .pack-label{text-decoration:line-through;color:var(--muted)}
+.pack-item.done .pack-sub{opacity:.5}
+.pack-cb{flex-shrink:0;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px}
+.pack-item.done .pack-cb{background:var(--forest);border-color:var(--forest)}
+.pack-ck{color:#fff;font-size:12px;font-weight:900;display:none;line-height:1}
+.pack-item.done .pack-ck{display:block}
+.pack-label{font-size:13px;font-weight:500;line-height:1.4}
+.pack-sub{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.5}
+.pack-tag{font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;flex-shrink:0;white-space:nowrap;margin-top:3px;align-self:flex-start}
+.pt-must{background:#fff0f0;color:#b91c1c}
+.pt-key{background:#fff8e6;color:#8a5000}
+.pt-jp{background:#e8eef8;color:#1b3a6b}
+.pack-reset-btn{display:block;width:calc(100% - 24px);margin:10px 12px 16px;padding:9px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--muted);cursor:pointer;text-align:center;font-family:inherit}
+.pack-reset-btn:active{background:var(--border)}
+
+/* ──── Souvenirs ──── */
+.sv-area-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:16px 16px 6px;display:flex;align-items:center;gap:8px}
+.sv-area-title::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--amber);flex-shrink:0}
+.sv-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);margin:0 12px 8px;overflow:hidden}
+.sv-card.sv-hero{border:2px solid var(--amber);background:#fffdf5}
+.sv-head{display:flex;align-items:flex-start;gap:10px;padding:12px 12px 5px}
+.sv-icon{font-size:28px;flex-shrink:0;line-height:1.2;margin-top:2px}
+.sv-info{flex:1}
+.sv-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.3}
+.sv-name-jp{font-size:11px;color:var(--muted);margin-top:2px}
+.sv-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.svb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px}
+.svb-must{background:#fff0f0;color:#b91c1c}
+.svb-star{background:var(--amber);color:#fff}
+.svb-sendai{background:#e8eef8;color:#1b3a6b}
+.svb-aomori{background:#e8f4ee;color:#1d6640}
+.svb-price{background:#f0fdf4;color:var(--forest);font-weight:700}
+.sv-desc{font-size:12px;color:#4a4a4a;padding:0 12px 5px;line-height:1.75}
+.sv-where{font-size:11px;color:var(--muted);padding:6px 12px 5px;border-top:1px solid var(--border);line-height:1.7}
+.sv-tip{font-size:11px;color:#1d6640;background:#e8f4ee;margin:0 12px 10px;padding:5px 9px;border-radius:6px;line-height:1.6}
+.sv-actions{display:flex;gap:6px;padding:4px 12px 10px;flex-wrap:wrap}
+@media(min-width:600px){
+  .sv-card{max-width:540px;margin-left:auto;margin-right:auto}
+  .sv-area-title{max-width:540px;margin-left:auto;margin-right:auto}
+  .weather-banner,.climate-section,.weather-days,.weather-links,.weather-note,.pack-weather-tip{max-width:516px;margin-left:auto;margin-right:auto}
+  .pack-progress-wrap,.pack-cat-title,.pack-list,.pack-reset-btn{max-width:516px;margin-left:auto;margin-right:auto}
+}
 </style>
 </head>
 <body>
@@ -198,6 +285,9 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
   <button class="day-btn" data-day="6" onclick="switchDay(6)">D6 ACAC</button>
   <button class="day-btn" data-day="7" onclick="switchDay(7)">D7 返台</button>
   <button class="day-btn" data-day="8" onclick="switchDay(8)">☕ 店家</button>
+  <button class="day-btn" data-day="9" onclick="switchDay(9)">🌤 天氣</button>
+  <button class="day-btn" data-day="10" onclick="switchDay(10)">🎒 打包</button>
+  <button class="day-btn" data-day="11" onclick="switchDay(11)">🎁 伴手禮</button>
 </nav>
 
 <div class="quick-bar">
@@ -435,6 +525,11 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
             <div class="resto-detail">あおば通駅前・步行5分</div>
             <div class="resto-note">ランチ営業あり・牛たん定食</div>
           </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">旨味太助（うまみたすけ）</span><span class="resto-score">BringYou 推薦</span></div>
+            <div class="resto-detail">国分町2-11-11・勾當台公園站步行5分・仙台站商店街散步15分</div>
+            <div class="resto-note">牛舌料理創始店・豪放大份量・定食A/B/C（4/5/6片）附麥飯・牛尾湯・排隊比善治郎短｜11:00~22:00（月曜定休 D2=金 ✓）</div>
+          </div>
         </div>
       </div>
     </div>
@@ -609,7 +704,17 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
           <div class="resto-item">
             <div class="resto-row"><span class="resto-name">松島さかな市場</span><span class="resto-score">口コミ多数</span></div>
             <div class="resto-detail">駅步行5分</div>
-            <div class="resto-note">海鮮政宗丼・かき食べ放題コースあり</div>
+            <div class="resto-note">海鮮政宗丼・かき食べ放題コースあり（15:00 終了）</div>
+          </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">牛たん炭焼 利久 松島五大堂店</span><span class="resto-score">BringYou 推薦</span></div>
+            <div class="resto-detail">五大堂對面・松島観光の帰り道</div>
+            <div class="resto-note">牛舌便當可外帶 ▸ 日式糰子（草莓・栗子・巧克力口味）超吸引人排隊，下午離開前掃貨</div>
+          </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">Pensee（パンセ）松島店</span><span class="resto-score">BringYou 推薦</span></div>
+            <div class="resto-detail">松島商店街</div>
+            <div class="resto-note">⚠️ 牡蠣咖哩麵包・容易完售（BringYou 兩訪都撲空），早來碰運氣</div>
           </div>
         </div>
       </div>
@@ -921,6 +1026,7 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
       </div>
       <div class="act-intro">
         <div class="closed-warn">⚠️ 6月旬食材：帆立・ウニ・活イカが中心。<br>鱈魚白子（タラの白子）の旬は12〜2月のため、6月は提供なし・または冷凍の可能性あり。事前確認推薦。</div>
+        <div class="closed-warn">🚫 <b>お食事処 おさない（月曜定休）= D5 利用不可</b><br>D5=6/15（月）は定休日。おさないはD6（火）に移動推薦 → D6欄位查看。</div>
         <div class="resto-list">
           <div class="resto-item rec">
             <div class="resto-row"><span class="resto-name">★ 魚処 一会（うおどころいちえ）</span><span class="resto-score">老舖高評價 54年</span></div>
@@ -936,6 +1042,16 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
             <div class="resto-row"><span class="resto-name">ほいど家</span><span class="resto-score">食べログ上位</span></div>
             <div class="resto-detail">青森市中心部</div>
             <div class="resto-note">店主が毎日市場通い・鮮魚五種盛り合わせが名物</div>
+          </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">長尾中華拉麵（長尾中華そば）</span><span class="resto-score">BringYou 推薦</span></div>
+            <div class="resto-detail">JR 青森站正前方</div>
+            <div class="resto-note">津輕拉麵・煮魚乾＋烤魚乾湯頭・在地體驗必吃（⚠️ 道地偏鹹）</div>
+          </div>
+          <div class="resto-item">
+            <div class="resto-row"><span class="resto-name">Viennese sweets Strauss</span><span class="resto-score">BringYou 推薦</span></div>
+            <div class="resto-detail">JR 青森站步行6分</div>
+            <div class="resto-note">澳洲認可甜點主廚 ▸ 青森蘋果卷（アップフェルシュトゥルーデル）加蘋果・葡萄乾・核桃・肉桂，喜歡肉桂必試</div>
           </div>
         </div>
       </div>
@@ -1087,6 +1203,11 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
       <div class="act-intro">
         <div class="closed-warn">⚠️ 6月の旬食材：帆立・ウニ・活イカ・白魚が中心。鱈白子は季節外（12〜2月）の可能性大。</div>
         <div class="resto-list">
+          <div class="resto-item rec">
+            <div class="resto-row"><span class="resto-name">★ お食事処 おさない</span><span class="resto-score">BringYou 強烈推薦</span></div>
+            <div class="resto-detail">青森市新町1-1-17・青森站步行3分（D6=火曜 ✓ OPEN）</div>
+            <div class="resto-note">「青森只能吃一間就選這裡」▸ ほたて貝焼みそ（味噌海膽帆立貝）必點・炸帆立貝定食・牛鍋壽喜燒定食｜10:30~13:20 / 16:00~18:50（月曜定休，D6=火 ✓）</div>
+          </div>
           <div class="resto-item rec">
             <div class="resto-row"><span class="resto-name">★ 石と肴 地雷也</span><span class="resto-score">口コミ高評價</span></div>
             <div class="resto-detail">青森市中心部・溶岩石焼き居酒屋</div>
@@ -1482,6 +1603,456 @@ body{font-family:-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;background
 
 </section>
 
+<!-- ══════════════════════ DAY 9 · 天氣 ══════════════════════ -->
+<section class="day-section" id="day-9">
+  <div class="weather-banner">
+    <h2>🌤 旅程天氣參考</h2>
+    <div class="w-sub">6/11–6/17 仙台・青森｜以下為6月歷史氣候均值，非即時預報<br>出發前請點下方連結查詢 tenki.jp 即時天氣</div>
+  </div>
+
+  <div class="weather-note">☔ 6月為東北地方梅雨季，仙台降雨頻繁；青森梅雨較晚、雨量較少。建議全程攜帶折疊傘，仙台日數加備薄雨衣或防水外套。</div>
+
+  <div class="climate-section">
+    <div class="climate-title-bar">6月氣候均值</div>
+    <div class="climate-grid">
+      <div class="climate-card">
+        <div class="c-loc">📍 仙台市（D1–D3）</div>
+        <div class="c-temp">17–23°C</div>
+        <div class="c-range">早晨涼爽・日間舒適</div>
+        <div class="c-note c-rain">☔ 梅雨高峰期</div>
+      </div>
+      <div class="climate-card">
+        <div class="c-loc">📍 青森市（D4–D7）</div>
+        <div class="c-temp">13–21°C</div>
+        <div class="c-range">早晨偏涼・日間溫和</div>
+        <div class="c-note c-sunny">🌤 少雨偏晴</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weather-days">
+    <div class="wday-card">
+      <div class="wd-date">D1<br>6/11 四</div>
+      <div class="wd-icon">🌧</div>
+      <div class="wd-info">
+        <div class="wd-temp">16–22°C</div>
+        <div class="wd-desc">多雲有雨　抵仙台下午</div>
+        <div class="wd-rain">☔ 降雨機率高</div>
+      </div>
+      <div class="wd-loc wd-sendai">仙台</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D2<br>6/12 五</div>
+      <div class="wd-icon">⛅</div>
+      <div class="wd-info">
+        <div class="wd-temp">17–23°C</div>
+        <div class="wd-desc">晴時多雲　JJK 聖地巡禮</div>
+      </div>
+      <div class="wd-loc wd-sendai">仙台</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D3<br>6/13 六</div>
+      <div class="wd-icon">🌦</div>
+      <div class="wd-info">
+        <div class="wd-temp">16–22°C</div>
+        <div class="wd-desc">多雲間晴　松島・androp Live</div>
+        <div class="wd-rain">☔ 午後有雨</div>
+      </div>
+      <div class="wd-loc wd-matsushima">松島</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D4<br>6/14 日</div>
+      <div class="wd-icon">☀️</div>
+      <div class="wd-info">
+        <div class="wd-temp">14–21°C</div>
+        <div class="wd-desc">晴　十和田・青森屋</div>
+      </div>
+      <div class="wd-loc wd-aomori">十和田</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D5<br>6/15 一</div>
+      <div class="wd-icon">🌤</div>
+      <div class="wd-info">
+        <div class="wd-temp">13–20°C</div>
+        <div class="wd-desc">晴時多雲　青森市區探索</div>
+      </div>
+      <div class="wd-loc wd-aomori">青森</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D6<br>6/16 二</div>
+      <div class="wd-icon">⛅</div>
+      <div class="wd-info">
+        <div class="wd-temp">14–21°C</div>
+        <div class="wd-desc">多雲　青森 ACAC</div>
+      </div>
+      <div class="wd-loc wd-aomori">青森</div>
+    </div>
+    <div class="wday-card">
+      <div class="wd-date">D7<br>6/17 三</div>
+      <div class="wd-icon">🌤</div>
+      <div class="wd-info">
+        <div class="wd-temp">13–19°C</div>
+        <div class="wd-desc">晴　AOJ 15:30 返台</div>
+      </div>
+      <div class="wd-loc wd-aomori">青森</div>
+    </div>
+  </div>
+
+  <div class="pack-weather-tip">
+    <strong>穿著建議</strong><br>
+    仙台（D1–3）：薄長袖 + 防水外套或雨衣、折疊傘必備<br>
+    十和田・青森屋（D4）：輕薄外套・舒適步行鞋<br>
+    青森市（D5–7）：早晨偏涼 13°C，早晚加薄外套<br>
+    整趟以 15–23°C 準備，洋蔥式穿搭最靈活
+  </div>
+
+  <div class="section-label">即時天氣預報</div>
+  <div class="weather-links">
+    <a class="weather-link" href="https://tenki.jp/forecast/2/9/3410/4105/" target="_blank">🌐 仙台天氣（tenki.jp）</a>
+    <a class="weather-link" href="https://tenki.jp/forecast/2/10/3110/2201/" target="_blank">🌐 青森天氣（tenki.jp）</a>
+    <a class="weather-link" href="https://www.jma.go.jp/jma/index.html" target="_blank">🌐 気象庁官網</a>
+  </div>
+</section>
+
+<!-- ══════════════════════ DAY 10 · 打包清單 ══════════════════════ -->
+<section class="day-section" id="day-10">
+  <div class="day-header">
+    <div class="day-num">打包清單</div>
+    <div class="day-title">🎒 仙台・青森 7日行李</div>
+    <div class="hotel-badge">6/11 出發｜點擊勾選，自動儲存</div>
+  </div>
+
+  <div class="pack-progress-wrap">
+    <div class="pp-label">打包進度 <span id="packCount">0 / 0</span></div>
+    <div class="pp-bar"><div class="pp-fill" id="packFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="pack-cat-title">📄 證件・重要文件</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p01" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">護照</div><div class="pack-sub">有效期限至少 6 個月以上</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p02" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">機票電子票務截圖</div><div class="pack-sub">BR118 去程 10:05 / BR121 回程 15:30</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p03" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">androp Live 票券（QR Code）</div><div class="pack-sub">e+ 確認信 / QR，6/13 darwin 18:00</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p04" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">旅遊平安保險</div><div class="pack-sub">保單號碼截圖存手機</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p05" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">飯店訂房確認信</div><div class="pack-sub">Vista威斯特 D1–3 / 青森屋 D4 / Dormy Inn D5–6</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+  </div>
+
+  <div class="pack-cat-title">💴 財務・支付</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p06" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">日圓現金</div><div class="pack-sub">建議 ¥60,000–80,000，含伴手禮預算</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p07" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">信用卡（VISA / Mastercard）</div><div class="pack-sub">至少 2 張不同卡備用</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p08" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">Suica / PASMO 或 IC 卡</div><div class="pack-sub">仙台地鐵、空港鐵道均可用</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+  </div>
+
+  <div class="pack-cat-title">👗 衣物配件</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p09" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">薄長袖 T-shirt × 4–5 件</div><div class="pack-sub">均溫 16–23°C</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p10" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">薄外套 × 1–2 件</div><div class="pack-sub">青森早晨 13°C，必備</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p11" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">防水外套 / 薄雨衣</div><div class="pack-sub">仙台梅雨季必備</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p12" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">折疊傘</div><div class="pack-sub">梅雨季節每日隨身</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p13" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">舒適步行鞋 × 1 雙</div><div class="pack-sub">大量行走，建議已磨合鞋款</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p14" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">androp Live 穿搭</div><div class="pack-sub">6/13 室內展演，舒適即可</div></div>
+      <div class="pack-tag pt-jp">行程專屬</div>
+    </div>
+  </div>
+
+  <div class="pack-cat-title">🔌 電子設備</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p15" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">智慧型手機 + 充電線</div><div class="pack-sub">所有 QR Code 與導覽都靠它</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p16" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">行動電源</div><div class="pack-sub">整日外出，建議 20,000mAh</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p17" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">日本 SIM / eSIM</div><div class="pack-sub">提前啟用，確認東北訊號覆蓋</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p18" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">相機 + 記憶卡</div><div class="pack-sub">松島・青森屋・ACAC 都值得拍</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p19" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">耳機</div><div class="pack-sub">電車通勤、androp 候場都好用</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+  </div>
+
+  <div class="pack-cat-title">🧴 盥洗・醫藥</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p20" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">常備藥（感冒・腸胃・止痛）</div><div class="pack-sub">日本藥局有售但語言費時</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p21" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">防曬乳 SPF50+</div><div class="pack-sub">6月日光偏強，戶外活動必備</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p22" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">OK 繃 / 防磨腳貼</div><div class="pack-sub">大量行走，腳底磨損預防</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p23" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">口罩</div><div class="pack-sub">日本室內部分場合仍佩戴</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+  </div>
+
+  <div class="pack-cat-title">🎒 旅途便利</div>
+  <div class="pack-list">
+    <div class="pack-item" data-pid="p24" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">可折疊環保袋 × 2</div><div class="pack-sub">買伴手禮超好用，日本超商購物袋收費</div></div>
+      <div class="pack-tag pt-key">重要</div>
+    </div>
+    <div class="pack-item" data-pid="p25" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">Google Maps 離線地圖下載</div><div class="pack-sub">仙台・青森區域提前下載</div></div>
+      <div class="pack-tag pt-must">必帶</div>
+    </div>
+    <div class="pack-item" data-pid="p26" onclick="togglePack(this)">
+      <div class="pack-cb"><span class="pack-ck">✓</span></div>
+      <div style="flex:1"><div class="pack-label">仙森導覽（本頁）加入書籤</div><div class="pack-sub">已加到首頁捷徑了嗎？📌</div></div>
+      <div class="pack-tag pt-jp">行程專屬</div>
+    </div>
+  </div>
+
+  <button class="pack-reset-btn" onclick="resetPack()">↺ 重置所有勾選</button>
+</section>
+
+<!-- ══════════════════════ DAY 11 · 伴手禮 ══════════════════════ -->
+<section class="day-section" id="day-11">
+  <div class="day-header">
+    <div class="day-num">伴手禮清單</div>
+    <div class="day-title">🎁 仙台・青森 必買推薦</div>
+    <div class="hotel-badge">預算建議 ¥15,000–25,000</div>
+  </div>
+
+  <!-- 青森 -->
+  <div class="sv-area-title">🍎 青森 <span class="day-hint">A-FACTORY・ASPAM・新青森駅</span></div>
+
+  <div class="sv-card sv-hero">
+    <div class="sv-head">
+      <div class="sv-icon">🍏</div>
+      <div class="sv-info">
+        <div class="sv-name">ソフトりんご（ふじ）</div>
+        <div class="sv-name-jp">そのままフリーズドライ 青森りんご</div>
+        <div class="sv-badges">
+          <span class="svb svb-star">⭐ 親自發現</span>
+          <span class="svb svb-must">必買</span>
+          <span class="svb svb-aomori">青森限定</span>
+          <span class="svb svb-price">¥350–500/包</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">整片富士蘋果冷凍乾燥製成，保留蘋果天然形狀與香氣。酥脆輕盈，入口即化，帶有濃郁蘋果甜香。包裝上印「香るはごたえ そのままフリーズドライ 青森りんご」——是你在青森親自發現的品項。</div>
+    <div class="sv-where">📍 購買地點：A-FACTORY（青森港）・新青森駅お土産館・ASPAM（青森縣觀光物產館）</div>
+    <div class="sv-tip">💡 輕薄不易碎，適合多買幾包分送，保存期限長，完全不怕帶回台灣。</div>
+    <div class="sv-actions">
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=A-FACTORY+青森" target="_blank">📍 A-FACTORY</a>
+      <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=新青森駅+お土産" target="_blank" style="background:#2b6e4e">📍 新青森駅</a>
+    </div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🍺</div>
+      <div class="sv-info">
+        <div class="sv-name">A-FACTORY りんごシードル</div>
+        <div class="sv-name-jp">青森蘋果氣泡酒・現釀</div>
+        <div class="sv-badges">
+          <span class="svb svb-aomori">青森限定</span>
+          <span class="svb svb-price">¥600–1,200/瓶</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">A-FACTORY 自釀的青森蘋果氣泡酒，可在2樓試喝機試飲多種口味後再選購。辛口・甘口・有機等多款。</div>
+    <div class="sv-where">📍 A-FACTORY 2F（JR 青森站旁）</div>
+    <div class="sv-tip">💡 玻璃瓶注意托運打包，建議用衣物包裹。</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🔥</div>
+      <div class="sv-info">
+        <div class="sv-name">スタミナ源タレ</div>
+        <div class="sv-name-jp">青森名產燒肉醬・萬用調味醬</div>
+        <div class="sv-badges">
+          <span class="svb svb-aomori">青森名產</span>
+          <span class="svb svb-price">¥400–700/瓶</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">青森縣人氣第一燒肉醬，入口甘甜帶蒜香，可作燒肉醬、炒菜、醃肉，是帶回台灣最實用的調味品，愛下廚的送禮首選。</div>
+    <div class="sv-where">📍 各大超市（イオン・マックスバリュ）・A-FACTORY・ASPAM</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🍶</div>
+      <div class="sv-info">
+        <div class="sv-name">陸奥八仙（むつはっせん）</div>
+        <div class="sv-name-jp">青森地酒・八戸酒造</div>
+        <div class="sv-badges">
+          <span class="svb svb-aomori">青森地酒</span>
+          <span class="svb svb-price">¥1,500–3,000/瓶</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">青森縣知名清酒品牌，八戸酒造出品，以果香豐富・入喉清爽著稱。熱愛日本酒的人必入手一瓶。</div>
+    <div class="sv-where">📍 青森市酒專賣店・ASPAM・新青森駅</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🌿</div>
+      <div class="sv-info">
+        <div class="sv-name">青森ヒバ製品（石鹸・アロマ）</div>
+        <div class="sv-name-jp">青森檜木石鹸・精油</div>
+        <div class="sv-badges">
+          <span class="svb svb-aomori">青森特產</span>
+          <span class="svb svb-price">¥800–2,000</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">青森「ヒバ（羅漢柏）」是天然抗菌木材，提煉的精油與石鹸帶清新森林香氣，天然無刺激。NICO STOCK 也有選品。</div>
+    <div class="sv-where">📍 NICO STOCK（青森駅 徒步3分）・ASPAM</div>
+  </div>
+
+  <!-- 仙台 -->
+  <div class="sv-area-title">🐄 仙台 <span class="day-hint">仙台駅エスパル・菓匠三全</span></div>
+
+  <div class="sv-card sv-hero">
+    <div class="sv-head">
+      <div class="sv-icon">🌕</div>
+      <div class="sv-info">
+        <div class="sv-name">萩の月（はぎのつき）</div>
+        <div class="sv-name-jp">菓匠三全・仙台代表銘菓</div>
+        <div class="sv-badges">
+          <span class="svb svb-must">必買</span>
+          <span class="svb svb-sendai">仙台定番</span>
+          <span class="svb svb-price">¥260/個</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">仙台最具代表性的銘菓，蓬鬆海綿蛋糕包覆濃郁卡士達奶油餡。口感柔軟入口即化，是仙台伴手禮中絕對不會出錯的選擇。松島商店街也有販售。</div>
+    <div class="sv-where">📍 仙台駅 エスパル・菓匠三全 各店・松島 菓匠三全 寺町小路店</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🟢</div>
+      <div class="sv-info">
+        <div class="sv-name">ずんだ餅・ずんだシェイク</div>
+        <div class="sv-name-jp">仙台毛豆麻糬・毛豆奶昔</div>
+        <div class="sv-badges">
+          <span class="svb svb-sendai">仙台名物</span>
+          <span class="svb svb-price">¥450–680</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">青豆（毛豆）研磨後調味的翠綠麻糬，是仙台最鮮明的在地風味。ずんだ茶寮的冰涼奶昔版更是仙台車站必試，旅途中可先嚐，回程再帶禮盒。</div>
+    <div class="sv-where">📍 ずんだ茶寮（仙台駅直結）・仙台空港</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🐟</div>
+      <div class="sv-info">
+        <div class="sv-name">笹かまぼこ</div>
+        <div class="sv-name-jp">竹葉造型魚板・仙台銘產</div>
+        <div class="sv-badges">
+          <span class="svb svb-sendai">仙台定番</span>
+          <span class="svb svb-price">¥150–300/片</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">仙台代表性魚板，形似竹葉，Q彈有嚼勁。阿部蒲鉾店（仙台站直結）最知名，可現場體驗手工製作。</div>
+    <div class="sv-where">📍 阿部蒲鉾店（仙台駅エスパル）・菓匠三全 松島店也可買到</div>
+  </div>
+
+  <div class="sv-card">
+    <div class="sv-head">
+      <div class="sv-icon">🥩</div>
+      <div class="sv-info">
+        <div class="sv-name">牛たん加工品</div>
+        <div class="sv-name-jp">仙台牛舌乾・味噌漬け</div>
+        <div class="sv-badges">
+          <span class="svb svb-sendai">仙台銘產</span>
+          <span class="svb svb-price">¥1,000–2,500</span>
+        </div>
+      </div>
+    </div>
+    <div class="sv-desc">牛舌味噌漬（冷藏）、牛舌乾（常溫可帶）、牛舌仙貝等多種形式，各牛舌名店均有販售。善治郎・利久・閣都有自家加工品。</div>
+    <div class="sv-where">📍 仙台駅 牛たん通り・各牛舌名店・仙台空港</div>
+  </div>
+
+</section>
+
 <!-- ══════════════════════ Quick Ref ══════════════════════ -->
 <div class="quick-ref">
   <h2>📋 快速參考</h2>
@@ -1523,11 +2094,55 @@ function toggleIntro(btn) {
   }
 }
 
+function togglePack(el) {
+  el.classList.toggle('done');
+  savePack();
+  updatePackProgress();
+}
+
+function updatePackProgress() {
+  const items = document.querySelectorAll('#day-10 .pack-item');
+  const done = document.querySelectorAll('#day-10 .pack-item.done');
+  const total = items.length;
+  const count = done.length;
+  const pct = total ? Math.round(count / total * 100) : 0;
+  const fill = document.getElementById('packFill');
+  const countEl = document.getElementById('packCount');
+  if (fill) fill.style.width = pct + '%';
+  if (countEl) countEl.textContent = count + ' / ' + total;
+}
+
+function savePack() {
+  const done = [];
+  document.querySelectorAll('#day-10 .pack-item.done').forEach(el => done.push(el.dataset.pid));
+  try { localStorage.setItem('sensin_pack', JSON.stringify(done)); } catch(e) {}
+}
+
+function loadPack() {
+  try {
+    const saved = localStorage.getItem('sensin_pack');
+    if (!saved) return;
+    JSON.parse(saved).forEach(pid => {
+      const el = document.querySelector('[data-pid="' + pid + '"]');
+      if (el) el.classList.add('done');
+    });
+  } catch(e) {}
+  updatePackProgress();
+}
+
+function resetPack() {
+  if (!confirm('確定要重置所有勾選嗎？')) return;
+  document.querySelectorAll('#day-10 .pack-item').forEach(el => el.classList.remove('done'));
+  try { localStorage.removeItem('sensin_pack'); } catch(e) {}
+  updatePackProgress();
+}
+
 (function () {
   const dayMap = {'6/11':1,'6/12':2,'6/13':3,'6/14':4,'6/15':5,'6/16':6,'6/17':7};
   const now = new Date();
   const key = (now.getMonth() + 1) + '/' + now.getDate();
   if (dayMap[key]) switchDay(dayMap[key]);
+  loadPack();
 })();
 </script>
 </body>
